@@ -18,7 +18,7 @@ class Munger():
     def engineer_features(self):
         self.all_data['Product_Info_2_char'] = self.all_data.Product_Info_2.str[1]
         self.all_data['Product_Info_2_num'] = self.all_data.Product_Info_2.str[2]
-    '''    
+   
         discrete = ['Medical_History_1','Medical_History_10', 'Medical_History_15', 
                     'Medical_History_24', 'Medical_History_32']
         
@@ -38,11 +38,11 @@ class Munger():
         self.all_data['Ht_sq'] = self.all_data['Ht']**2
         self.all_data['Wt_sq'] = self.all_data['Wt']**2
         self.all_data = self.all_data.drop(['Ht','Wt'], axis=1)
-    '''  
+
     def one_hot_encode(self):        
         categorical = ['Product_Info_1', 'Product_Info_2', 'Product_Info_3', 
                        'Product_Info_5', 'Product_Info_6', 'Product_Info_7',
-                       'Product_Info_2_char', 'Product_Info_2_num', 
+                       # 'Product_Info_2_char', 'Product_Info_2_num', 
                        'Employment_Info_2', 'Employment_Info_3', 'Employment_Info_5', 
                        'InsuredInfo_1', 'InsuredInfo_2', 'InsuredInfo_3', 
                        'InsuredInfo_4', 'InsuredInfo_5', 'InsuredInfo_6', 
@@ -69,7 +69,7 @@ class Munger():
             self.all_data = pd.concat((self.all_data, all_data_dummy), axis=1)
  
     def missing_val_handling(self):         
-        print('Eliminate missing values')    
+        print('Eliminating missing values')    
         # Use -1 for any others
         self.all_data.fillna(-1, inplace=True)
         # fix the dtype on the label column
@@ -83,7 +83,7 @@ class Munger():
         
 def clean_data():
     M = Munger()
-    M.engineer_features()
+    # M.engineer_features()
     M.one_hot_encode()
     M.missing_val_handling()
     return M
